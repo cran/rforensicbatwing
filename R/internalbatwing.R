@@ -22,14 +22,14 @@
 .internalbatwing <-
 function(database, reps = 10, burnin = 0, treebetN = 10, Nbetsamp = 10, muprior = "constant(0.003)", Nprior = "lognormal(9, 1)", alphaprior = NULL, forensicmode, progress = TRUE, trace = FALSE) { 
   if (is.null(database) || !is.matrix(database) || ncol(database) == 0 || nrow(database) == 0 || !is.numeric(database)) {
-    stop("database must be a matrix of integers")
+    stop("database must be a matrix of positive integers (> 0)")
   }
   if (nrow(database) == 1) {
     database <- matrix(as.integer(database), nrow = 1)
   } else {
     database <- apply(database, 2, as.integer)
   }
-
+  
   if (is.null(reps) || length(reps) != 1 || !is.numeric(reps) || reps <= 0) {
     stop("reps must be >= 1")
   }

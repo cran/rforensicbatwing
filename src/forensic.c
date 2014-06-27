@@ -208,7 +208,7 @@ void printhaplist(FILE *out, forensic *any)
   for (j=1;j<=any->nloc;j++) {
     fprintf(out,"L%d ", j);
   }
-  fprintf(out,"count nvisits\n", j);
+  fprintf(out,"count nvisits\n");
   for (;;) {
     for (j=1;j<=any->nloc;j++) {
       fprintf(out,"%d ",here->haptype[j]);

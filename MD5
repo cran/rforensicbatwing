@@ -1,8 +1,8 @@
-9032f2c4eefa3a952167ab15ab85be76 *DESCRIPTION
-d73ce544da36f8c44d2646b8c473a171 *NAMESPACE
-4280d74fc478edbdb4b9c828b9428547 *R/batwing.R
-c6c3c1fdc10844cdf1e3df939497ce32 *R/coalmatchprob.R
-fef59a07b573130df606497cf50429d4 *R/internalbatwing.R
+fae1a2df72fc99e794fcfc635d7419c1 *DESCRIPTION
+4d8f773ceda3d1b24f19d2a28d0ad301 *NAMESPACE
+399cdfdbeb8b4678f9facda81e25b3c6 *R/batwing.R
+9c91650153fce4d3e9675ead6e2d182b *R/coalmatchprob.R
+3cd25d41324fd490be4134c00ff45ca3 *R/internalbatwing.R
 00a3fafbef7e02b88ab3af52cf26cd59 *R/plot.forensicbatwing.R
 61041b8192afb3a0dfa6f840fc6e9b6b *R/print.batwing.R
 30737156d08e59093e178d0db38bcce8 *man/coalmatchprob.Rd
@@ -19,7 +19,7 @@ b3f86c20b81b51f5162874977d38784d *src/Makevars
 94bcab2559287ce5d99aee584ff10775 *src/cutjoin.c
 9887b6a3dc24885387d360ff2f0e5e8e *src/cutjoin.h
 b83fccc29e5833f802597bcf54bdf508 *src/distribution.h
-74d944bd343dc7c53983fbcf058e142a *src/forensic.c
+fc0d9f9816786b690ebcc7d8d01b934f *src/forensic.c
 a861eb27adec4214b49b8098ebdec84b *src/forensic.h
 3c7c928587786b61489b40d73abc3ccc *src/growthmodel.c
 e0b45adee9de68e3bcf2307944f38a50 *src/growthmodel.h
@@ -44,7 +44,7 @@ c4a5629c8c0d378e3bfac56f55cf1af7 *src/newfac.h
 6e7681ec7b68cec0f2e29394943a983a *src/newick.h
 6080808b71434480e88494c786781f9e *src/node.c
 b3c762cc13f70ac2764f1cacbf2c6aa5 *src/node.h
-58b3cf8ba037c8c316e69af2c992f038 *src/pars.c
+f843e16b48ef73afb0e4892a0abe09e1 *src/pars.c
 1bd0685e42db5ced02e1e152f6be624e *src/pars.h
 f855b9819f679511c1a6949462188f2b *src/prior.c
 1b448d3d79711aae8dc14c8b8f49ac16 *src/prior.h

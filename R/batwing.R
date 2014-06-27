@@ -21,6 +21,10 @@
 
 batwing <-
 function(database, reps = 10, burnin = 0, treebetN = 10, Nbetsamp = 10, muprior = "constant(0.003)", Nprior = "lognormal(9, 1)", alphaprior = NULL, progress = TRUE, trace = FALSE) { 
+
+  if (any(database <= 0)) {
+    stop("database must consist of positive integers (> 0) only")
+  }
   
   res <- .internalbatwing(database = database, 
     reps = reps, 

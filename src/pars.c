@@ -209,7 +209,7 @@ const char *check_pars(parameters *p, char *buff,int *bufflen) {
     static char c[1023];
 
 
-    *bufflen+=sprintf(buff,"Checking parameters read from infile file\n",buff);
+    *bufflen+=sprintf(buff,"Checking parameters read from infile file\n");
 
     if (p->g.sizemodel>0&&(!p->usetheta)&&isnullpriorval(&p->g.alpha))
         return "parameters incorrect - exponential growth with N and mu but with no prior for alpha\n";

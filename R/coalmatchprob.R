@@ -34,7 +34,16 @@ function(database, haplotype, reps = 10, burnin = 0, treebetN = 10, Nbetsamp = 1
     stop("haplotype must have a length corresponding to the number of columns of database")
   }
   haplotype <- as.integer(haplotype)  
-  
+
+
+  if (any(database <= 0)) {
+    stop("database must consist of positive integers (> 0) only")
+  }
+  if (any(haplotype <= 0)) {
+    stop("haplotype must consist of positive integers (> 0) only")
+  }
+
+
   missing <- rep(-1, length(haplotype))
   data <- rbind(haplotype, missing, database)
   attr(data, "dimnames") <- NULL
