@@ -7,6 +7,8 @@
 */
 #include "batwing.h"
 
+#include <Rcpp.h>
+
 /*
 reps
 Number of output lines
@@ -304,29 +306,27 @@ void print_parameters(parameters *p) {
   }
 }
 
-SEXP batwing(SEXP _data, SEXP _reps, SEXP _burnin, SEXP _treebetN, SEXP _Nbetsamp, SEXP _muprior, SEXP _nmuprior, SEXP _Nprior, SEXP _alphaprior, SEXP _forensicmode, SEXP _progress, SEXP _trace) {
+// [[Rcpp::export]]
+Rcpp::List batwing_rcpp(Rcpp::IntegerMatrix data, 
+  int reps, int burnin, int treebetN, int Nbetsamp, 
+  Rcpp::CharacterVector mupriorsvec, int nmuprior, 
+  Rcpp::CharacterVector Nprior, 
+  Rcpp::Nullable<Rcpp::CharacterVector> alphaprior, 
+  bool forensicmode, 
+  bool progress, 
+  bool trace) {
+
   Rcpp::RNGScope();
 
   Rcpp::Function Rprint("print");
-  Rcpp::IntegerMatrix data(_data);
 
-  int reps = Rcpp::as<int>(_reps);
-  int burnin = Rcpp::as<int>(_burnin);
-  int treebetN = Rcpp::as<int>(_treebetN);
-  int Nbetsamp = Rcpp::as<int>(_Nbetsamp);  
-  
   int nSTR = data.ncol();
   
-  Rcpp::CharacterVector mupriorsvec(_muprior);
-  std::string Npriorstr = Rcpp::as<std::string>(_Nprior); 
-  std::string alphapriorstr; 
-  int nmuprior = Rcpp::as<int>(_nmuprior);
-  char* Nprior = (char*)(Npriorstr.c_str()); 
-  char* alphaprior = NULL;
+  std::string Npriorstr = Rcpp::as<std::string>(Nprior); 
+  char* Npriorcharptr = (char*)(Npriorstr.c_str()); 
   
-  bool forensicmode = Rcpp::as<int>(_forensicmode);
-  bool progress = Rcpp::as<int>(_progress); 
-  bool trace = Rcpp::as<int>(_trace); 
+  std::string alphapriorstr;   
+  char* alphapriorcharptr = NULL;
   
   if (trace) {
     progress = true;
@@ -339,15 +339,15 @@ SEXP batwing(SEXP _data, SEXP _reps, SEXP _burnin, SEXP _treebetN, SEXP _Nbetsam
   p = default_parameters();
   set_MCMC_iteration_counts(&p, reps, burnin, treebetN, Nbetsamp);
   set_mu_priors(&p, mupriorsvec, nSTR);
-  set_N_prior(&p, Nprior);
-  
-  if (Rf_isNull(_alphaprior)) {
-    set_constant_population_size(&p);
+  set_N_prior(&p, Npriorcharptr);  
+
+  if (alphaprior.isNotNull()) {
+    alphapriorstr = Rcpp::as<std::string>(alphaprior); 
+    alphapriorcharptr = (char*)(alphapriorstr.c_str()); 
+    set_exponential_population_size(&p, alphapriorcharptr);
   } else {
-    alphapriorstr = Rcpp::as<std::string>(_alphaprior); 
-    alphaprior = (char*)(alphapriorstr.c_str()); 
-    set_exponential_population_size(&p, alphaprior);
-  }
+    set_constant_population_size(&p);
+  }  
 
   fill_data_from_parameters(&p, data);
   t = partreestartup(&p);
@@ -489,7 +489,7 @@ SEXP batwing(SEXP _data, SEXP _reps, SEXP _burnin, SEXP _treebetN, SEXP _Nbetsam
     Rcpp::Named("muprior") = mupriorsvec,
     Rcpp::Named("nmuprior") = nmuprior,
     Rcpp::Named("Nprior") = Npriorstr,
-    Rcpp::Named("alphaprior") = Rf_isNull(_alphaprior) ? "" : alphapriorstr
+    Rcpp::Named("alphaprior") = (alphaprior.isNotNull()) ? alphapriorstr : ""
   );
   
   ret["result"] = result;
@@ -520,6 +520,6 @@ SEXP batwing(SEXP _data, SEXP _reps, SEXP _burnin, SEXP _treebetN, SEXP _Nbetsam
   accept_hyperpars.attr("names") = accept_hyperpars_names;
   ret["accepted_hyperparameters"] = accept_hyperpars;
   
-  return(Rcpp::wrap(ret));  
+  return(ret);  
 }
 

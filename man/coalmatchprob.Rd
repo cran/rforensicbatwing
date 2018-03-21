@@ -90,8 +90,8 @@ Mikkel Meyer Andersen and Ian Wilson
 
 \examples{
 \dontrun{
-database <- matrix(c(0, 0, 1, 1, 0, 2), 3, 2)
-haplotype <- c(0, 0)
+database <- matrix(c(1, 1, 2, 2, 1, 3), 3, 2)
+haplotype <- c(1, 1)
 
 # coalmatchprob:
 coalmp <- coalmatchprob(database, haplotype, 

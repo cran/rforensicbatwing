@@ -82,7 +82,16 @@ function(database, reps = 10, burnin = 0, treebetN = 10, Nbetsamp = 10, muprior 
   
   attr(database, "dimnames") <- NULL
   
-  res <- .Call("batwing", database, reps, burnin, treebetN, Nbetsamp, muprior, length(muprior), Nprior, alphaprior, forensicmode, progress, trace, PACKAGE = "rforensicbatwing")
+  #batwing_rcpp(Rcpp::IntegerMatrix data, int reps, int burnin, int treebetN, int Nbetsamp, 
+  #             Rcpp::CharacterVector mupriorsvec, int nmuprior, 
+  #             Rcpp::CharacterVector Nprior, 
+  #             Rcpp::CharacterVector alphaprior, 
+  #             bool forensicmode, bool progress, bool trace)
+  res <- batwing_rcpp(database, reps, burnin, treebetN, Nbetsamp, 
+                      muprior, length(muprior), 
+                      Nprior, 
+                      alphaprior, 
+                      forensicmode, progress, trace)
   
   col.i <- colnames(res$result) == "mu"
   if (any(col.i) && sum(col.i) > 1) {

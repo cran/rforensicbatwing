@@ -34,7 +34,7 @@
 #include "myio.h"
 #include "forensic.h"
 
-RcppExport SEXP batwing(SEXP _data, SEXP _reps, SEXP _burnin, SEXP _treebetN, SEXP _Nbetsamp, SEXP _muprior, SEXP _nmuprior, SEXP _Nprior, SEXP _alphaprior, SEXP _forensicmode, SEXP _progress, SEXP _trace);
+//RcppExport SEXP batwing(SEXP _data, SEXP _reps, SEXP _burnin, SEXP _treebetN, SEXP _Nbetsamp, SEXP _muprior, SEXP _nmuprior, SEXP _Nprior, SEXP _alphaprior, SEXP _forensicmode, SEXP _progress, SEXP _trace);
 
 #endif
 
